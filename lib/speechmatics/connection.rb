@@ -14,18 +14,18 @@ module Speechmatics
     ].freeze
 
     def merge_default_options(opts={})
+      opts = opts.slice(*ALLOWED_OPTIONS)
       headers = opts.delete(:headers) || {}
       params = opts.delete(:params) || {}
       options = HashWithIndifferentAccess.new(
         {
-          :headers => {
-            'User-Agent'   => user_agent,
-            'Accept'       => "application/json"
-            # 'Content-Type' => "application/json"
+          headers: {
+            'User-Agent' => user_agent,
+            'Accept'     => "application/json"
           },
-          :ssl => {:verify => false},
-          :url => endpoint,
-          :params => { :auth_token => auth_token }
+          ssl: { verify: false },
+          url: endpoint,
+          params: { auth_token: auth_token }
         }        
       ).merge(opts)
       options[:headers] = options[:headers].merge(headers)
@@ -35,14 +35,16 @@ module Speechmatics
 
     def connection(options={})
       opts = merge_default_options(options)
-      Faraday::Connection.new(opts) do |connection|
+
+      @conn ||= Faraday::Connection.new(opts) do |connection|
+        connection.request  :multipart
         connection.request  :url_encoded
 
         connection.response :mashify
         connection.response :logger if ENV['DEBUG']
         connection.response :json
 
-        connection.adapter(adapter)
+        connection.adapter(*adapter)
       end
 
     end
