@@ -1,11 +1,19 @@
 # Speechmatics
 
-TODO: Write a gem description
+Speechmatics (https://speechmatics.com) provides an API for speech to text (https://speechmatics.com/api-details.  This gem implements the API making it easier to integrate into Ruby and/or Rails projects.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+### libmagic
 
+This gem will attempt to derive the content type of uploaded audio files using the 'ruby-filemagic' gem (https://github.com/blackwinter/ruby-filemagic), which requires the 'libmagic' native library to be installed.
+
+You can explicitly specify the `content_type` for the `data_file`, and libmagic will not be called.
+
+### gem
+
+Add this line to your application's Gemfile:
+  
     gem 'speechmatics'
 
 And then execute:
@@ -18,7 +26,50 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+See the tests, or here is basic usage:
+```ruby
+
+# configure with api key and user id to use for all requsts
+Speechmatics.configure do |sm|
+  sm.auth_token = '<your api key here>'
+  sm.user_id    = 1234
+
+  # these are defaults
+  sm.adapter    = :excon
+  sm.endpoint   = 'http://api.speechmatics.com/v1.0/'
+  sm.user_agent = "Speechmatics Ruby Gem #{Speechmatics::VERSION}"
+end
+
+# create a new client
+c = Speechmatics::Client.new
+
+# retrieve user
+j = c.user.get
+
+# list jobs
+jobs = c.user.jobs.list
+
+# create job
+info = c.user.jobs.create(data_file: '/Users/nobody/dev/speechmatics/test/zero.wav')
+
+# create job with more options
+info = c.user.jobs.create(
+  data_file: '/Users/nobody/dev/speechmatics/test/zero.wav',
+  content_type: 'audio/x-wav; charset=binary',
+  notification: '<email | none | callback>',
+  callback: 'http://www.example.com/transcript_callback'
+)
+
+# retrieve job
+job = c.user.jobs.find(5678)
+
+# retrieve audio for a job
+audio = c.user.jobs(5678).audio
+
+# retrieve trancript for a job
+trans = c.user.jobs(5678).transcript
+
+```
 
 ## Contributing
 
