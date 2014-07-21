@@ -17,3 +17,4 @@ test/version_tmp
 tmp
 .key
 notes.txt
+.DS_Store
