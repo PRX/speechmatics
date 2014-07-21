@@ -65,9 +65,13 @@ job = c.user.jobs.find(5678)
 
 # retrieve audio for a job
 audio = c.user.jobs(5678).audio
+# alt syntax
+audio = c.user.jobs.audio(5678)
 
 # retrieve trancript for a job
 trans = c.user.jobs(5678).transcript
+# alt syntax
+trans = c.user.jobs.transcript(5678)
 
 ```
 
