@@ -40,7 +40,7 @@ module Speechmatics
     end
 
     def [](key)
-      if self.object.is_a?(Array)
+      if self.object.is_a?(Array) || self.object.is_a?(Hash)
         self.object[key]
       else
         self.object.send(:"#{key}")

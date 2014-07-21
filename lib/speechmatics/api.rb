@@ -37,7 +37,7 @@ module Speechmatics
       end
 
       conn = connection((params[:options] || {}).merge(current_options))
-      request_path = (conn.path_prefix + '/' + path + '/').gsub(/\/+/, '/') 
+      request_path = (conn.path_prefix + '/' + path).gsub(/\/+/, '/') 
 
       response = conn.send(method) do |request|
         case method.to_sym
@@ -63,13 +63,9 @@ module Speechmatics
       parts.join('/') + '/'
     end
 
-    def paginate(params={})
-      {limit: 20, offset: 0}.merge(params)
-    end
-
     def list(params={})
       self.current_options = current_options.merge(args_to_options(params))
-      request(:get, base_path, paginate(params))
+      request(:get, base_path)
     end
 
     def get(params={})
