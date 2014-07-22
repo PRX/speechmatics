@@ -36,7 +36,7 @@ Speechmatics.configure do |sm|
 
   # these are defaults
   sm.adapter    = :excon
-  sm.endpoint   = 'http://api.speechmatics.com/v1.0/'
+  sm.endpoint   = 'https://api.speechmatics.com/v1.0/'
   sm.user_agent = "Speechmatics Ruby Gem #{Speechmatics::VERSION}"
 end
 

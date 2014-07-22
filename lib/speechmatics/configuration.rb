@@ -15,7 +15,7 @@ module Speechmatics
     DEFAULT_ADAPTER = :excon
 
     # The api endpoint to get REST
-    DEFAULT_ENDPOINT = 'http://api.speechmatics.com/v1.0/'.freeze
+    DEFAULT_ENDPOINT = 'https://api.speechmatics.com/v1.0/'.freeze
 
     # The value sent in the http header for 'User-Agent' if none is set
     DEFAULT_USER_AGENT = "Speechmatics Ruby Gem #{Speechmatics::VERSION}".freeze
