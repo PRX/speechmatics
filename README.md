@@ -4,14 +4,6 @@ Speechmatics (https://speechmatics.com) provides an API for speech to text (http
 
 ## Installation
 
-### libmagic
-
-This gem will attempt to derive the content type of uploaded audio files using the 'ruby-filemagic' gem (https://github.com/blackwinter/ruby-filemagic), which requires the 'libmagic' native library to be installed.
-
-You can explicitly specify the `content_type` for the `data_file`, and libmagic will not be called.
-
-### gem
-
 Add this line to your application's Gemfile:
   
     gem 'speechmatics'
