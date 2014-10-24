@@ -17,11 +17,6 @@ module Speechmatics
       request(:get, "#{base_path}/transcript")
     end
 
-    def audio(params={})
-      self.current_options = current_options.merge(args_to_options(params))
-      request(:get, "#{base_path}/audio")
-    end
-
     def set_mode(params={})
       params[:model] ||= 'en-US'
       params

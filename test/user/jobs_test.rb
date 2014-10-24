@@ -25,8 +25,7 @@ describe Speechmatics::Client do
           "notification" => "email",
           "size" => 1955132,
           "transcription" => "test.json",
-          "job_status" => "done",
-          "url" => "/user/1/jobs/2/audio"
+          "job_status" => "done"
         },
         {
           "created_at" => "Wed, 04 Dec 2013 16:08:33 GMT",
@@ -38,8 +37,7 @@ describe Speechmatics::Client do
           "notification" => "email",
           "size" => 6475938,
           "transcription" => nil,
-          "job_status" => "transcribing",
-          "url" => "/user/1/jobs/12/audio"
+          "job_status" => "transcribing"
         }
       ]
     }
@@ -55,17 +53,17 @@ describe Speechmatics::Client do
       }
       ],
       "words" => [
-      { 
+      {
         "duration" => "0.230",
         "name" => "Hello",
         "time" => "0.590"
       },
-      { 
+      {
         "duration" => "0.070",
         "name" => "World",
         "time" => "0.960"
       },
-      { 
+      {
         "duration" => "0.000",
         "name" => ".",
         "time" => "1.270"
