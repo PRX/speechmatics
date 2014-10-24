@@ -5,7 +5,7 @@ Speechmatics (https://speechmatics.com) provides an API for speech to text (http
 ## Installation
 
 Add this line to your application's Gemfile:
-  
+
     gem 'speechmatics'
 
 And then execute:
@@ -55,17 +55,22 @@ info = c.user.jobs.create(
 # retrieve job
 job = c.user.jobs.find(5678)
 
-# retrieve audio for a job
-audio = c.user.jobs(5678).audio
-# alt syntax
-audio = c.user.jobs.audio(5678)
-
 # retrieve trancript for a job
 trans = c.user.jobs(5678).transcript
 # alt syntax
 trans = c.user.jobs.transcript(5678)
 
 ```
+
+## Changes
+
+* 0.1.0 - 10/24/2014
+  Remove /user/$userid/jobs/$jobid/audio endpoint, no longer supported by speechmatics
+
+* 0.0.2 - 8/7/2014
+  Minor bug fix, treat integers/numbers as strings for params
+  Use mimemagic to determine content type (no more libmagic dependency; this works on heroku)
+  Switched the endpoint to use new 'https' requirement
 
 ## Contributing
 
