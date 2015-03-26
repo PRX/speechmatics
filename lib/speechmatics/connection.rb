@@ -26,7 +26,7 @@ module Speechmatics
           ssl: { verify: false },
           url: endpoint,
           params: { auth_token: auth_token }
-        }        
+        }
       ).merge(opts)
       options[:headers] = options[:headers].merge(headers)
       options[:params] = options[:params].merge(params)
@@ -37,14 +37,26 @@ module Speechmatics
       opts = merge_default_options(options)
 
       @conn ||= Faraday::Connection.new(opts) do |connection|
-        connection.request  :multipart
-        connection.request  :url_encoded
 
-        connection.response :mashify
-        connection.response :logger if ENV['DEBUG']
-        connection.response :json
+        if Faraday::VERSION =~ /^0\.7\.(.*)/
+          connection.use Faraday::Request::Multipart
+          connection.use Faraday::Request::UrlEncoded
 
-        connection.adapter(*adapter)
+          connection.use FaradayMiddleware::Mashify
+          connection.use Faraday::Response::Logger if ENV['DEBUG']
+          connection.use FaradayMiddleware::ParseJson
+
+          connection.use "Faraday::Adapter::#{adapter.to_s.classify}".constantize
+        else
+          connection.request  :multipart
+          connection.request  :url_encoded
+
+          connection.response :mashify
+          connection.response :logger if ENV['DEBUG']
+          connection.response :json
+
+          connection.adapter(*adapter)
+        end
       end
 
     end

@@ -7,6 +7,5 @@ SimpleCov.start
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/spec'
-require 'webmock/minitest'
 
 require 'speechmatics'

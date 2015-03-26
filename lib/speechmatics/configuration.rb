@@ -46,7 +46,7 @@ module Speechmatics
     # Reset configuration options to their defaults
     def reset!
       self.user_id      = nil
-      self.auth_token      = nil
+      self.auth_token   = nil
       self.adapter      = DEFAULT_ADAPTER
       self.endpoint     = DEFAULT_ENDPOINT
       self.user_agent   = DEFAULT_USER_AGENT
