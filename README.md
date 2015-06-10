@@ -1,5 +1,8 @@
 # Speechmatics
 
+[![Gem Version](https://badge.fury.io/rb/speechmatics.svg)](http://badge.fury.io/rb/speechmatics)
+[![Build Status](https://travis-ci.org/PRX/speechmatics.svg?branch=master)](https://travis-ci.org/PRX/speechmatics)
+
 Speechmatics (https://speechmatics.com) provides an API for speech to text (https://speechmatics.com/api-details.  This gem implements the API making it easier to integrate into Ruby and/or Rails projects.
 
 ## Installation
