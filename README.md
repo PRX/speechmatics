@@ -3,7 +3,9 @@
 [![Gem Version](https://badge.fury.io/rb/speechmatics.svg)](http://badge.fury.io/rb/speechmatics)
 [![Build Status](https://travis-ci.org/PRX/speechmatics.svg?branch=master)](https://travis-ci.org/PRX/speechmatics)
 
-Speechmatics (https://speechmatics.com) provides an API for speech to text (https://speechmatics.com/api-details.  This gem implements the API making it easier to integrate into Ruby and/or Rails projects.
+Speechmatics (https://speechmatics.com) provides an API for speech to text (https://speechmatics.com/api-details).
+
+This gem implements the API making it easier to integrate into Ruby and/or Rails projects.
 
 ## Installation
 
@@ -68,21 +70,21 @@ trans = c.user.jobs.transcript(5678)
 ## Changes
 
 * 0.1.3 - 6/10/2015
-  Add default timeout of 120 seconds.
+  - Add default timeout of 120 seconds.
 
 * 0.1.2 - 6/10/2015
-  Yanked
+  - Yanked
 
 * 0.1.1 - 3/26/2015
-  Fix to work with Faraday 0.7.6
+  - Fix to work with Faraday 0.7.6
 
 * 0.1.0 - 10/24/2014
-  Remove /user/$userid/jobs/$jobid/audio endpoint, no longer supported by speechmatics
+  - Remove /user/$userid/jobs/$jobid/audio endpoint, no longer supported by speechmatics
 
 * 0.0.2 - 8/7/2014
-  Minor bug fix, treat integers/numbers as strings for params
-  Use mimemagic to determine content type (no more libmagic dependency; this works on heroku)
-  Switched the endpoint to use new 'https' requirement
+  - Minor bug fix, treat integers/numbers as strings for params
+  - Use mimemagic to determine content type (no more libmagic dependency; this works on heroku)
+  - Switched the endpoint to use new 'https' requirement
 
 ## Contributing
 
