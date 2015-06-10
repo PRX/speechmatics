@@ -64,6 +64,15 @@ trans = c.user.jobs.transcript(5678)
 
 ## Changes
 
+* 0.1.3 - 6/10/2015
+  Add default timeout of 120 seconds.
+
+* 0.1.2 - 6/10/2015
+  Yanked
+
+* 0.1.1 - 3/26/2015
+  Fix to work with Faraday 0.7.6
+
 * 0.1.0 - 10/24/2014
   Remove /user/$userid/jobs/$jobid/audio endpoint, no longer supported by speechmatics
 
