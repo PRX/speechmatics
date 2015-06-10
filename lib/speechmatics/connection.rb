@@ -17,18 +17,13 @@ module Speechmatics
       opts = opts.slice(*ALLOWED_OPTIONS)
       headers = opts.delete(:headers) || {}
       params = opts.delete(:params) || {}
-      options = HashWithIndifferentAccess.new(
-        {
-          url: endpoint,
-          params: { auth_token: auth_token },
-          headers: {
-            'User-Agent' => user_agent,
-            'Accept' => 'application/json'
-          },
-          ssl: { verify: false },
-          request: { timeout: 120 }
-        }
-      ).merge(opts)
+      options = {
+        url: endpoint,
+        params: { auth_token: auth_token },
+        headers: { 'User-Agent' => user_agent, 'Accept' => 'application/json' },
+        ssl: { verify: false },
+        request: { timeout: 120 }
+      }.merge(opts)
       options[:headers] = options[:headers].merge(headers)
       options[:params] = options[:params].merge(params)
       options
