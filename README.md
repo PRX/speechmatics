@@ -40,6 +40,10 @@ end
 # create a new client
 c = Speechmatics::Client.new
 
+# create a new client, passing in Faraday parameters
+# you can also pass in the same options as in `configure`
+c = Speechmatics::Client.new(:request => { :timeout => 240 })
+
 # retrieve user
 j = c.user.get
 
