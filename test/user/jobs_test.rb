@@ -93,8 +93,15 @@ describe Speechmatics::Client do
     jl.jobs.count.must_equal 2
   end
 
-  it "creates job" do
+  it "creates job for an audio file" do
     r = jobs.create(data_file: File.expand_path(File.dirname(__FILE__) + '/../zero.wav'))
+    r.id.must_equal 2
+    r.cost.must_equal 0.50
+    r.balance.must_equal 90
+  end
+  
+  it "creates job for a video file" do
+    r = jobs.create(data_file: File.expand_path(File.dirname(__FILE__) + '/../zero.mp4'))
     r.id.must_equal 2
     r.cost.must_equal 0.50
     r.balance.must_equal 90
