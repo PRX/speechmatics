@@ -73,6 +73,9 @@ trans = c.user.jobs.transcript(5678)
 
 ## Changes
 
+* 0.1.4 - 8/21/2015
+  - Add support for video files.
+
 * 0.1.3 - 6/10/2015
   - Add default timeout of 120 seconds.
 
