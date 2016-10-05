@@ -37,7 +37,7 @@ module Speechmatics
       end
 
       conn = connection((params[:options] || {}).merge(current_options))
-      request_path = (conn.path_prefix + '/' + path).gsub(/\/+/, '/') 
+      request_path = (conn.path_prefix + '/' + path).gsub(/\/+/, '/')
 
       response = conn.send(method) do |request|
         case method.to_sym
