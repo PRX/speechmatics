@@ -18,6 +18,11 @@ module Speechmatics
       request(:get, "#{base_path}/transcript")
     end
 
+    def alignment(params={})
+      self.current_options = current_options.merge(args_to_options(params))
+      request(:get, "#{base_path}/alignment")
+    end
+
     def set_mode(params={})
       unless params[:text_file]
         params[:model] ||= 'en-US'
