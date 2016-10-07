@@ -49,7 +49,7 @@ module Speechmatics
 
           connection.response :mashify
           connection.response :logger if ENV['DEBUG']
-          connection.response :json
+          connection.response :json, :content_type => /\bjson$/
 
           connection.adapter(*adapter)
         end

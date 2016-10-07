@@ -8,6 +8,7 @@ module Speechmatics
 
     def create(params={})
       attach_audio(params)
+      attach_text(params) if params[:text_file]
       set_mode(params)
       super
     end
@@ -17,8 +18,15 @@ module Speechmatics
       request(:get, "#{base_path}/transcript")
     end
 
+    def alignment(params={})
+      self.current_options = current_options.merge(args_to_options(params))
+      request(:get, "#{base_path}/alignment")
+    end
+
     def set_mode(params={})
-      params[:model] ||= 'en-US'
+      unless params[:text_file]
+        params[:model] ||= 'en-US'
+      end
       params
     end
 
@@ -32,6 +40,13 @@ module Speechmatics
       raise "Content type for file '#{file_path}' is not audio or video, it is '#{content_type}'." unless (content_type =~ /audio|video/)
 
       params[:data_file] = Faraday::UploadIO.new(file_path, content_type)
+      params
+    end
+
+    def attach_text(params={})
+      file_path = params[:text_file]
+      raise "No file exists at path '#{file_path}'" unless File.exists?(file_path)
+      params[:text_file] = Faraday::UploadIO.new(file_path, "text/plain; charset=utf-8",)
       params
     end
 
