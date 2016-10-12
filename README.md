@@ -73,6 +73,9 @@ trans = c.user.jobs.transcript(5678)
 
 ## Changes
 
+* 0.2.0 - 10/12/2016
+  - Added alignment support, thanks @rogerz42892
+
 * 0.1.4 - 8/21/2015
   - Add support for video files.
 
