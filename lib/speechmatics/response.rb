@@ -2,25 +2,22 @@
 
 module Speechmatics
   class Response
+
+    def self.parse(response, request={})
+      new(response, request).tap do |res|
+        res.check_for_error
+      end
+    end
+
     attr_accessor :raw, :request
 
     def initialize(response, request={})
       @raw     = response
       @request = request
-
-      check_for_error(response)
     end
 
-    def check_for_error(response)
-      status_code_type = response.status.to_s[0]
-      case status_code_type
-      when "2"
-        # puts "all is well, status: #{response.status}"
-      when "4", "5"
-        raise "Whoops, error back from Speechmatics: #{response.status}"
-      else
-        raise "Unrecongized status code: #{response.status}"
-      end
+    def check_for_error
+      raise Error.classify(self) unless (200..299).include?(raw.status)
     end
 
     def body
