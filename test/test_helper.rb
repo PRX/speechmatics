@@ -9,3 +9,7 @@ require 'minitest/autorun'
 require 'minitest/spec'
 
 require 'speechmatics'
+
+def raw_response_stub(status, body = '')
+  Struct.new(:status, :body).new(status, body)
+end
