@@ -3,6 +3,6 @@
 class Speechmatics::Response::Error
   class TooManyRequests < self
     ERROR_STATUS = 429
-    def self.matches_message?(_message); true; end
+    ERROR_MESSAGE = 'Too Many requests'
   end
 end

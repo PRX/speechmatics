@@ -3,6 +3,6 @@
 class Speechmatics::Response::Error
   class Unauthorized < self
     ERROR_STATUS = 401
-    def self.matches_message?(_message); true; end
+    ERROR_MESSAGE = 'Invalid User Id or Token'
   end
 end

@@ -17,7 +17,7 @@ module Speechmatics
     end
 
     def check_for_error
-      raise Error.classify(self) unless (200..299).include?(raw.status)
+      raise Error.classify(self) if raw.status >= 400
     end
 
     def body
