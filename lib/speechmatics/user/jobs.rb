@@ -15,10 +15,10 @@ module Speechmatics
 
     def transcript(params={})
       self.current_options = current_options.merge(args_to_options(params))
-      if params[:format] = "txt" || params[:format] = "text"
-        request(:get, "#{base_path}/transcript")
-      else
+      if params[:format] == "txt" || params[:format] == "text"
         request(:get, "#{base_path}/transcript?format=txt")
+      else
+        request(:get, "#{base_path}/transcript")
       end
     end
 
