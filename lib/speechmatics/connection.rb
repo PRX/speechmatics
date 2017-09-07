@@ -20,7 +20,7 @@ module Speechmatics
       options = {
         url: endpoint,
         params: { auth_token: auth_token },
-        headers: { 'User-Agent' => user_agent, 'Accept' => 'application/json' },
+        headers: { 'User-Agent' => user_agent },
         ssl: { verify: false },
         request: { timeout: 120 }
       }.merge(opts)
@@ -30,38 +30,15 @@ module Speechmatics
     end
 
     def connection(options={})
-      if options[:allow_text]
-        allow_text = true
-        options.delete(:allow_text)
-      else
-        allow_text =false
-      end
       opts = merge_default_options(options)
 
       @conn ||= Faraday::Connection.new(opts) do |connection|
-
-        if Faraday::VERSION =~ /^0\.7\.(.*)/
-          connection.use Faraday::Request::Multipart
-          connection.use Faraday::Request::UrlEncoded
-
-          connection.use FaradayMiddleware::Mashify
-          connection.use Faraday::Response::Logger if ENV['DEBUG']
-          connection.use FaradayMiddleware::ParseJson
-
-          connection.use "Faraday::Adapter::#{adapter.to_s.classify}".constantize
-        else
-          connection.request  :multipart
-          connection.request  :url_encoded
-
-          connection.response :mashify
-          connection.response :logger if ENV['DEBUG']
-          if allow_text
-            connection.response :json, :content_type => /\bjson$/
-          else
-            connection.response :json
-          end
-          connection.adapter(*adapter)
-        end
+        connection.request  :multipart
+        connection.request  :url_encoded
+        connection.response :mashify
+        connection.response :logger if ENV['DEBUG']
+        connection.response :json, :content_type => /\bjson$/
+        connection.adapter(*adapter)
       end
     end
   end
