@@ -48,7 +48,7 @@ module Speechmatics
           request.body = params[:data]
         end
       end
-      Speechmatics::Response.new(response, {api: self, method: method, path: path, params: params})
+      Speechmatics::Response.parse(response, {api: self, method: method, path: path, params: params})
     end
 
     def base_path

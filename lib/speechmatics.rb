@@ -7,6 +7,8 @@ require "speechmatics/version"
 require 'speechmatics/configuration'
 require 'speechmatics/connection'
 require 'speechmatics/response'
+require 'speechmatics/response/error'
+Gem.find_files('speechmatics/response/error/*.rb').each { |path| require path }
 require 'speechmatics/api'
 require 'speechmatics/api_factory'
 require 'speechmatics/client'
