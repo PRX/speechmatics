@@ -73,6 +73,9 @@ trans = c.user.jobs.transcript(5678)
 
 ## Changes
 
+* 0.2.1 - 13 Sept 2017
+  - Updated error handling with a class for each error type. Thanks @mziwisky
+
 * 0.2.0 - 10/12/2016
   - Added alignment support, thanks @rogerz42892
 
