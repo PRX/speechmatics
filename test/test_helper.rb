@@ -8,6 +8,8 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/spec'
 
+require 'byebug'
+
 require 'speechmatics'
 
 def raw_response_stub(status, body = '')
