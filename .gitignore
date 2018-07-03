@@ -18,3 +18,4 @@ tmp
 .key
 notes.txt
 .DS_Store
+.env
