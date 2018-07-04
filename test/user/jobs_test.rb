@@ -76,6 +76,7 @@ describe Speechmatics::Client do
     Faraday::Adapter::Test::Stubs.new do |stub|
       stub.get('/v1.0/user/1/jobs/?auth_token=token') { [200, {}, list_jobs.to_json] }
       stub.post('/v1.0/user/1/jobs/?auth_token=token') { [200, {}, new_job.to_json] }
+      stub.get('/v1.0/user/1/jobs/1/transcript?format=txt&auth_token=token') { [200, {}, "Hello World."] }
       stub.get('/v1.0/user/1/jobs/1/transcript?auth_token=token') { [200, {}, transcript.to_json] }
     end
   }
@@ -99,7 +100,7 @@ describe Speechmatics::Client do
     r.cost.must_equal 0.50
     r.balance.must_equal 90
   end
-  
+
   it "creates job for a video file" do
     r = jobs.create(data_file: File.expand_path(File.dirname(__FILE__) + '/../zero.mp4'))
     r.id.must_equal 2
@@ -113,4 +114,8 @@ describe Speechmatics::Client do
     t.words.count.must_equal 3
   end
 
+  it "gets transcript as text" do
+    t = jobs.transcript(job_id: 1, format: "txt")
+    t.object.must_equal "Hello World."
+  end
 end
