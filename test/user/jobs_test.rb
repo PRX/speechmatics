@@ -128,4 +128,22 @@ describe Speechmatics::Client do
     a = jobs.alignment(job_id: 1)
     a.object.must_equal alignment
   end
+
+  it "can fetch txt transcription after fetching full" do
+    t1 = jobs.transcript(job_id: 1)
+    t1.speakers.count.must_equal 1
+    t1.words.count.must_equal 3
+
+    t2 = jobs.transcript(job_id: 1, format: "txt")
+    t2.object.must_equal "Hello World."
+  end
+
+  it "can fetch alignment after fetching transcription" do
+    t = jobs.transcript(job_id: 1)
+    t.speakers.count.must_equal 1
+    t.words.count.must_equal 3
+
+    a = jobs.alignment(job_id: 1)
+    a.object.must_equal alignment
+  end
 end
