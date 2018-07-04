@@ -7,8 +7,8 @@ describe Speechmatics::Client do
   let(:response) {
     {
       user: {
-         balance: 90, 
-         email: "demo@speechmatics.com", 
+         balance: 90,
+         email: "demo@speechmatics.com",
          id: 1
        }
     }
@@ -16,7 +16,7 @@ describe Speechmatics::Client do
 
   let(:stubs) {
     Faraday::Adapter::Test::Stubs.new do |stub|
-      stub.get('/v1.0/user/1/?auth_token=token') { [200, {}, response.to_json] }
+      stub.get('/v1.0/user/1/?auth_token=token') { [200, {"Content-Type" => "application/json"}, response.to_json] }
     end
   }
 

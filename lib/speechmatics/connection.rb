@@ -30,12 +30,6 @@ module Speechmatics
     end
 
     def connection(options={})
-      if options[:allow_text]
-        allow_text = true
-        options.delete(:allow_text)
-      else
-        allow_text =false
-      end
       opts = merge_default_options(options)
 
       @conn ||= Faraday::Connection.new(opts) do |connection|
@@ -55,11 +49,7 @@ module Speechmatics
 
           connection.response :mashify
           connection.response :logger if ENV['DEBUG']
-          if allow_text
-            connection.response :json, :content_type => /\bjson$/
-          else
-            connection.response :json
-          end
+          connection.response :json, :content_type => /\bjson$/
           connection.adapter(*adapter)
         end
       end

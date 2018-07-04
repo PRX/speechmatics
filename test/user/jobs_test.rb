@@ -78,11 +78,11 @@ describe Speechmatics::Client do
 
   let(:stubs) {
     Faraday::Adapter::Test::Stubs.new do |stub|
-      stub.get('/v1.0/user/1/jobs/?auth_token=token') { [200, {}, list_jobs.to_json] }
-      stub.post('/v1.0/user/1/jobs/?auth_token=token') { [200, {}, new_job.to_json] }
-      stub.get('/v1.0/user/1/jobs/1/transcript?format=txt&auth_token=token') { [200, {}, "Hello World."] }
-      stub.get('/v1.0/user/1/jobs/1/transcript?auth_token=token') { [200, {}, transcript.to_json] }
-      stub.get('/v1.0/user/1/jobs/1/alignment?auth_token=token') { [200, {}, alignment] }
+      stub.get('/v1.0/user/1/jobs/?auth_token=token') { [200, {"Content-Type" => "application/json"}, list_jobs.to_json] }
+      stub.post('/v1.0/user/1/jobs/?auth_token=token') { [200, {"Content-Type" => "application/json"}, new_job.to_json] }
+      stub.get('/v1.0/user/1/jobs/1/transcript?format=txt&auth_token=token') { [200, {"Content-Type" => "text/plain"}, "Hello World."] }
+      stub.get('/v1.0/user/1/jobs/1/transcript?auth_token=token') { [200, {"Content-Type" => "application/json"}, transcript.to_json] }
+      stub.get('/v1.0/user/1/jobs/1/alignment?auth_token=token') { [200, {"Content-Type" => "text/plain"}, alignment] }
     end
   }
 
