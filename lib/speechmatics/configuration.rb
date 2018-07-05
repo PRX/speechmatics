@@ -20,7 +20,7 @@ module Speechmatics
     # The value sent in the http header for 'User-Agent' if none is set
     DEFAULT_USER_AGENT = "Speechmatics Ruby Gem #{Speechmatics::VERSION}".freeze
 
-    attr_accessor *VALID_OPTIONS_KEYS
+    attr_accessor(*VALID_OPTIONS_KEYS)
 
     # Convenience method to allow for global setting of configuration options
     def configure

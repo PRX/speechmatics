@@ -5,7 +5,7 @@ module Speechmatics
 
     include Connection
 
-    attr_reader *Speechmatics::Configuration.keys
+    attr_reader(*Speechmatics::Configuration.keys)
 
     attr_accessor :current_options
 
@@ -89,7 +89,7 @@ module Speechmatics
     end
 
     def args_to_options(args)
-      params =  if args.is_a?(String) || args.is_a?(Symbol) || args.is_a?(Numeric)
+      if args.is_a?(String) || args.is_a?(Symbol) || args.is_a?(Numeric)
         {"#{self.class.name.demodulize.downcase.singularize}_id" => args.to_s}
       elsif args.is_a?(Hash)
         args
