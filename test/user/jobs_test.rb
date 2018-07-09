@@ -72,12 +72,17 @@ describe Speechmatics::Client do
     }
   }
 
+  let(:alignment) {
+    "[00:00:00.1]	Hello world how are you?"
+  }
+
   let(:stubs) {
     Faraday::Adapter::Test::Stubs.new do |stub|
-      stub.get('/v1.0/user/1/jobs/?auth_token=token') { [200, {}, list_jobs.to_json] }
-      stub.post('/v1.0/user/1/jobs/?auth_token=token') { [200, {}, new_job.to_json] }
-      stub.get('/v1.0/user/1/jobs/1/transcript?format=txt&auth_token=token') { [200, {}, "Hello World."] }
-      stub.get('/v1.0/user/1/jobs/1/transcript?auth_token=token') { [200, {}, transcript.to_json] }
+      stub.get('/v1.0/user/1/jobs/?auth_token=token') { [200, {"Content-Type" => "application/json"}, list_jobs.to_json] }
+      stub.post('/v1.0/user/1/jobs/?auth_token=token') { [200, {"Content-Type" => "application/json"}, new_job.to_json] }
+      stub.get('/v1.0/user/1/jobs/1/transcript?format=txt&auth_token=token') { [200, {"Content-Type" => "text/plain"}, "Hello World."] }
+      stub.get('/v1.0/user/1/jobs/1/transcript?auth_token=token') { [200, {"Content-Type" => "application/json"}, transcript.to_json] }
+      stub.get('/v1.0/user/1/jobs/1/alignment?auth_token=token') { [200, {"Content-Type" => "text/plain"}, alignment] }
     end
   }
 
@@ -117,5 +122,28 @@ describe Speechmatics::Client do
   it "gets transcript as text" do
     t = jobs.transcript(job_id: 1, format: "txt")
     t.object.must_equal "Hello World."
+  end
+
+  it "can align a text representation of the audio" do
+    a = jobs.alignment(job_id: 1)
+    a.object.must_equal alignment
+  end
+
+  it "can fetch txt transcription after fetching full" do
+    t1 = jobs.transcript(job_id: 1)
+    t1.speakers.count.must_equal 1
+    t1.words.count.must_equal 3
+
+    t2 = jobs.transcript(job_id: 1, format: "txt")
+    t2.object.must_equal "Hello World."
+  end
+
+  it "can fetch alignment after fetching transcription" do
+    t = jobs.transcript(job_id: 1)
+    t.speakers.count.must_equal 1
+    t.words.count.must_equal 3
+
+    a = jobs.alignment(job_id: 1)
+    a.object.must_equal alignment
   end
 end

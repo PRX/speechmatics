@@ -16,7 +16,7 @@ module Speechmatics
     def transcript(params={})
       self.current_options = current_options.merge(args_to_options(params))
       if params[:format] == "txt"
-        request(:get, "#{base_path}/transcript?format=txt", {:options => {:allow_text => true}})
+        request(:get, "#{base_path}/transcript?format=txt")
       else
         request(:get, "#{base_path}/transcript")
       end
@@ -24,7 +24,7 @@ module Speechmatics
 
     def alignment(params={})
       self.current_options = current_options.merge(args_to_options(params))
-      request(:get, "#{base_path}/alignment", {:options => {:allow_text => true}})
+      request(:get, "#{base_path}/alignment")
     end
 
     def set_mode(params={})
