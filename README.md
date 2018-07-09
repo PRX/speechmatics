@@ -72,6 +72,8 @@ trans = c.user.jobs.transcript(5678)
 ```
 
 ## Changes
+* 0.2.2 - 9 July 2018
+  - Permit requesting transcriptions in text/plain, or mixed requests. Thanks @benlangfeld
 
 * 0.2.1 - 13 Sept 2017
   - Updated error handling with a class for each error type. Thanks @mziwisky
